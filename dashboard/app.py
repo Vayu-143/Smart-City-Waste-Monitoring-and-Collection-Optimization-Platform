@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from streamlit_autorefresh import st_autorefresh
+
 # ==========================================
 # PAGE CONFIG
 # ==========================================
@@ -9,6 +11,12 @@ import matplotlib.pyplot as plt
 st.set_page_config(
     page_title="Smart City Waste Dashboard",
     layout="wide"
+)
+
+# Auto refresh every 10 seconds
+st_autorefresh(
+    interval=10000,
+    key="dashboardrefresh"
 )
 
 # ==========================================
