@@ -22,9 +22,6 @@ env/
 .DS_Store
 Thumbs.db
 
-# Generated reports (optional)
-outputs/*.pdf
-
 # Generated charts (optional)
 outputs/*.png
 
