@@ -8,7 +8,7 @@ from datetime import datetime
 # SMART CITY WASTE MONITORING
 # ==================================
 
-WRITE_API_KEY = "0THW755AP8ZVX1N5"
+WRITE_API_KEY = "YOUR_THINGSPEAK_WRITE_API_KEY"
 
 THINGSPEAK_URL = "https://api.thingspeak.com/update"
 
