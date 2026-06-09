@@ -1,0 +1,35 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# VS Code settings
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated reports (optional)
+outputs/*.pdf
+
+# Generated charts (optional)
+outputs/*.png
+
+# Runtime data (optional)
+data/*.csv
+
+# Logs
+*.log
