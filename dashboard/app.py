@@ -42,11 +42,76 @@ st.sidebar.info(
 )
 
 # ==========================================
-# LOAD DATA
+# THINGSPEAK CONFIG
 # ==========================================
 
-df = pd.read_csv("data/waste_data.csv")
+CHANNEL_ID = "3404107"
+READ_API_KEY = "PFZ0QLNIVZ20YM3Q"
 
+# ==========================================
+# LOAD DATA FROM THINGSPEAK
+# ==========================================
+
+@st.cache_data(ttl=10)
+def load_data():
+
+    url = (
+        f"https://api.thingspeak.com/channels/"
+        f"{CHANNEL_ID}/feeds.csv"
+        f"?api_key={READ_API_KEY}"
+        f"&results=100"
+    )
+
+    df = pd.read_csv(url)
+
+    df = df.rename(
+        columns={
+            "created_at": "Timestamp",
+            "field1": "Distance",
+            "field2": "FillPercent",
+            "field3": "Status",
+            "field4": "Alert",
+            "field5": "CollectionRequired"
+        }
+    )
+
+    df["Distance"] = pd.to_numeric(
+        df["Distance"],
+        errors="coerce"
+    )
+
+    df["FillPercent"] = pd.to_numeric(
+        df["FillPercent"],
+        errors="coerce"
+    )
+
+    df["Alert"] = pd.to_numeric(
+        df["Alert"],
+        errors="coerce"
+    )
+
+    df["CollectionRequired"] = pd.to_numeric(
+        df["CollectionRequired"],
+        errors="coerce"
+    )
+
+    def get_priority(fill):
+
+        if fill >= 80:
+            return "HIGH"
+        elif fill >= 40:
+            return "MEDIUM"
+        else:
+            return "LOW"
+
+    df["Priority"] = df["FillPercent"].apply(
+        get_priority
+    )
+
+    return df.dropna()
+
+
+df = load_data()
 latest = df.iloc[-1]
 
 # ==========================================

@@ -1,7 +1,5 @@
 streamlit
 pandas
 matplotlib
-numpy
-requests
-reportlab
 streamlit-autorefresh
+requests
